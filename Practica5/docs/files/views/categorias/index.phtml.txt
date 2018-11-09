@@ -1,0 +1,51 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-8 text-light"><h2>Lista de categorias</h2></div>
+<div class="col-sm-4">
+	<a href="<?php echo APP_URL.'tareas'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Lista de tareas
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'tareas/agregar'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Tarea
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias/agregar'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Categoria
+		</button>
+	</a>
+</div>		
+</div>
+	</div>
+	<div class=" table-striped">
+	<table class="col-md-12" style=" border-width: 3px; border-color: black ;">
+		<tr class="table-primary">
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Acción</th>
+		</tr>
+		<tr>
+			<?php foreach ($this->categorias as $Categoria): ?>
+				<tr>
+					<td><?php  echo $Categoria["id"];?></td>
+					<td><?php  echo $Categoria["nombre"];?></td>
+					<td>
+						<a href="<?php  echo APP_URL.'categorias/editar/'.$Categoria["id"]; ?>">
+							<button class="btn btn-sm btn-primary">
+								<span class="fa fa-paint-brush" ></span> Editar
+							</button>
+						</a>
+						<a href="<?php  echo APP_URL.'categorias/Eliminar/'.$Categoria["id"]; ?>">
+							<button class="btn btn-sm btn-primary">
+								<span class="fa fa-trash"></span> Eliminar
+							</button>
+						</a>
+					</td>
+				</tr>
+			<?php endforeach ?>
+		</tr>
+	</table>
+    </div>

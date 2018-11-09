@@ -1,0 +1,60 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-8 text-light"><h2>Editar Tarea</h2></div>
+<div class="col-sm-4">
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'tareas/agregar'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Tarea
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias/agregar'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Categoria
+		</button>
+	</a>
+</div>		
+</div>
+</div>
+<div class="container">
+	<div class="col-md-6 mx-auto">		
+		<form action="<?php echo APP_URL."tareas/editar"; ?>" method="POST">
+			<input type="hidden" name="id" value="<?php echo $this->tarea["id"]; ?>">
+			<div class="form-group">
+				<label for="nombre">Nombre</label>
+				<input type="text" name="nombre" class="form-control" value="<?php echo $this->tarea["nombre"]; ?>">
+			</div>
+			<div class="form-group">
+				<label for="descripcion">Descripcion</label>
+				<textarea name="descripcion" cols="10" rows="3" class="form-control"><?php echo $this->tarea["descripcion"]; ?>
+				</textarea>
+			</div>
+			<div class="form-group">
+				<label for="fecha">Fecha</label>
+				<input type="date" name="fecha" class="form-control" value="<?php echo $this->tarea["fecha"]; ?>">
+			</div>
+			<div class="form-group">
+				<label for="prioridad">Prioridad</label>
+				<input type="range" name="prioridad" min="0" max="10" class="form-control" value="<?php echo $this->tarea["prioridad"]; ?>">
+			</div>
+			<div class="form-group">
+				<label for="categoria">Categoria</label>
+				<select name="categoria" class="form-control">
+					<?php 
+						foreach ($this->categorias as $categoria) {
+							echo "<option value=".$categoria[0].">".$categoria[1]."</option>";
+						}
+					?>
+				</select>
+			</div>
+			<div class="form-group">
+				
+			</div>
+			<button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Guardar</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,97 @@
+<?php  
+	class tareasController extends AppController
+	{
+		/**
+		 * Hereda de la clase construct
+		 * @return type
+		 */
+		public function __construct()
+		{
+			parent::__construct();
+		}
+		/**
+		 * carga la vista index de tareas
+		 * @return type
+		 */
+		public function index()
+		{
+			$tareas = $this->loadModel("tarea");
+			$categorias = $this->loadModel("categoria");
+			$this->_view->tareas=$tareas->getTareas();
+			$this->_view->categorias=$categorias->getCategorias();
+			$this->_view->titulo="Pagina principal";
+			$this->_view->renderizar("index");
+		}
+		/**
+		 * Carga la vista index de tareas con los modelos tareas y categorias y obtiene todas las tareas existentes en la base de datos y las enlaza con sus categorias
+		 * @return type
+		 */
+		public function agregar()
+		{
+			if($_POST)
+			{
+				$tareas = $this->loadModel("tarea");
+				$this->_view->tareas = $tareas->agregar($_POST);
+				$this->redirect(array("controller"=>"tareas"));
+			}
+			$categorias = $this->loadModel("categoria");
+			$this->_view->categorias=$categorias->getCategorias();
+			$this->_view->titulo="Agregar Tarea";
+			$this->_view->renderizar("agregar");
+		}
+		/**
+		 * carga la vista editar con la id de la tarea seleccionada y carga las categorias existentes y carga la funcion editar
+		 * @param type $id 
+		 * @return type
+		 */
+		public function editar($id)
+		{
+			if($_POST)
+			{
+				$tareas = $this->loadModel("tarea");
+				$tareas->actualizar($_POST);
+				$this->redirect(array("controller"=>"tareas"));
+
+			}
+			$tareas = $this->loadModel("tarea");
+			$this->_view->tarea = $tareas->buscarPorId($id);
+
+			$categorias = $this->loadModel("categoria");
+			$this->_view->categorias=$categorias->getCategorias();
+
+			$this->_view->titulo="Editar Tarea";
+			$this->_view->renderizar("editar");
+		}
+		/**
+		 * carga los metodos buscar por id para encontrar en la base de datos la tarea solicitada y eliminar por id para borrarla seguidamente recarga la pagina index de tareas
+		 * @param type $id 
+		 * @return type
+		 */
+		public function eliminar($id){
+			$tarea = $this->loadModel("tarea");
+			$registro=$tarea->buscarPorId($id);
+			if (!empty($registro)) {
+				$tarea->eliminarPorId($id);
+				$this->redirect(array("controller"=>"tareas"));
+			}
+		}
+		/**
+		 * Busca por id la tarea seleccionada en la base de datos y cambia el estado que tiene para abrirla o cerrarla segun la ocacion
+		 * @param type $id 
+		 * @param type $status 
+		 * @return type
+		 */
+		public function cambiarEstado($id, $status){
+			$tarea = $this->loadModel("tarea");
+			if ($status==0) {
+				$status=1;
+			}
+			else{
+				$status=0;
+			}
+			$tarea->status($id, $status);
+			$this->redirect(array("controller"=>"tareas"));
+		}
+
+	}
+?>
