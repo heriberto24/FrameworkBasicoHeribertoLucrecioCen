@@ -1,0 +1,53 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-8 text-light"><h2>Editar transaccion</h2></div>
+<div class="col-sm-4">
+	<a href="<?php echo APP_URL.'usuarios'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de usuarios
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'transacciones'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Lista de transacciones
+		</button>
+	</a>
+</div>	
+</div>
+</div>
+<div class="container">
+	<div class="col-md-6 mx-auto">		
+		<form action="<?php echo APP_URL."transacciones/editar"; ?>" method="POST">
+			<input type="hidden" name="id" value="<?php echo $this->transaccion["id"]; ?>">
+			<label for="cantidad">Cantidad</label>
+			<input type="text" name="cantidad" class="form-control" value="<?php echo $this->transaccion["cantidad"]; ?>">
+
+			<label for="fecha">Fecha</label>
+			<input type="date" name="fecha" class="form-control">
+
+			<label for="categoria">Categoria</label>
+			<select name="categoria" class="form-control">
+				<?php
+				print_r($this->categorias); 
+					foreach ($this->categorias as $categoria) {
+						if ($this->transaccion["id_categoria"]==$categoria[0]) {
+						echo "<option value=".$categoria[0]." selected >".$categoria[1]."</option>";
+						}
+						else
+						{
+						echo "<option value=".$categoria[0].">".$categoria[1]."</option>";	
+						}
+
+					}
+				?>
+			</select>
+			<button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Guardar</button>
+		</form>
+	</div>
+</div>
+

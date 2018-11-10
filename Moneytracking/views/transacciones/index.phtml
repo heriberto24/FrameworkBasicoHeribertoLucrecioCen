@@ -1,0 +1,79 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-8 text-light"><h2>Lista de transacciones</h2></div>
+<div class="col-sm-4">
+	<a href="<?php echo APP_URL.'usuarios'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de usuarios
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'transacciones/agregar'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Transaccion
+		</button>
+	</a>
+</div>
+</div>
+	</div>
+	<div class="table-striped">
+	<table class="col-md-12" style=" border-width: 3px; border-color: black ;">
+		<tr class="table-primary">
+			<th>ID</th>
+			<th>Cantidad</th>
+			<th>Fecha</th>
+			<th>Categoria</th>
+			<th>Accion</th>
+		</tr>
+			<?php foreach ($this->transacciones as $transaccion): ?>
+				<?php if ($transaccion["transacciones"]["estado"]==1): ?>
+				<tr style="background-color: green" >					
+				<?php endif ?>
+				<?php if ($transaccion["transacciones"]["estado"]==0): ?>
+                <tr style="background-color: red" >
+				<?php endif ?>
+
+					<td><?php  echo $transaccion["transacciones"]["id"];?></td>
+					<td><?php  echo "$".$transaccion["transacciones"]["cantidad"];?></td>
+					<td><?php 
+					$date = date_create($transaccion["transacciones"]["fecha"]);
+					echo date_format($date,'d/m/y' );
+					?></td>
+					<td><?php  echo $transaccion['categorias']["nombre"];?></td>
+					<td>
+						<a href="<?php  echo APP_URL.'transacciones/editar/'.$transaccion["transacciones"]["id"]; ?>">
+							<button class="btn btn-sm btn-primary">
+								<span class="fa fa-paint-brush"></span> Editar
+							</button>
+						</a>
+						<a href="<?php  echo APP_URL.'transacciones/Eliminar/'.$transaccion["transacciones"]["id"]; ?>">
+							<button class="btn btn-sm btn-primary">
+								<span class="fa fa-trash"></span> Eliminar
+							</button>
+						</a>
+						<?php
+						if ($transaccion["transacciones"]["estado"]==1) {?>
+							<a href="<?php echo APP_URL."transacciones/cambiarEstado/".$transaccion["transacciones"]["id"]."/".$transaccion["transacciones"]["estado"];?>">
+								<button class="btn btn-sm btn-primary">
+									<span class="fa fa-share"></span> Egresar
+								</button>
+						</a>
+						 <?php } 
+						 elseif ($transaccion["transacciones"]["estado"]==0) {?>
+						 	<a href="<?php echo APP_URL."transacciones/cambiarEstado/".$transaccion["transacciones"]["id"]."/".$transaccion["transacciones"]["estado"];?>">
+						 		<button class="btn btn-sm btn-primary">
+						 			<span class="fa fa-reply"></span> Ingresar
+						 		</button>
+						 </a>
+						 <?php
+						 }
+						 ?>
+					</td>
+				</tr>
+			<?php endforeach ?>
+	</table>
+    </div>

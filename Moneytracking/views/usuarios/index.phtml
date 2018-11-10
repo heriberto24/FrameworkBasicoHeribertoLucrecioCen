@@ -1,0 +1,55 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-8 text-light"><h2>Lista de usuarios</h2></div>
+<div class="col-sm-4">
+	<a href="<?php echo APP_URL.'transacciones'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de transacciones
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'usuarios/agregar'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Usuario
+		</button>
+	</a>
+</div>		
+</div>
+	</div>
+	<div class="table-striped">
+	<table class="col-md-12" style=" border-width: 3px; border-color: black ;">
+		<tr class="table-primary">
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Email</th>
+			<th>Accion</th>
+		</tr>
+		<tr>
+			<?php foreach ($this->usuarios as $usuario): ?>
+				<tr>
+					<td><?php  echo $usuario["id"];?></td>
+					<td><?php  echo $usuario["nombre"];?></td>
+					<td><?php  echo $usuario["apellidos"];?></td>
+					<td><?php  echo $usuario["email"];?></td>
+					<td>
+						<a href="<?php  echo APP_URL.'usuarios/editar/'.$usuario["id"]; ?>">
+							<button class="btn btn-sm btn-primary">
+								<span class="fa fa-paint-brush"></span> Editar
+							</button>
+						</a>
+						<a href="<?php  echo APP_URL.'usuarios/Eliminar/'.$usuario["id"]; ?>">
+							<button class="btn btn-sm btn-primary">
+								<span class="fa fa-trash"></span> Eliminar
+							</button>
+						</a>
+					</td>
+				</tr>
+			<?php endforeach ?>
+		</tr>
+	</table>
+    </div>

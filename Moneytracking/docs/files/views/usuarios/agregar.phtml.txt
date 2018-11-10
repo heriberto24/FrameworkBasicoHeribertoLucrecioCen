@@ -1,0 +1,44 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-6 text-light"><h2>Agregar usuarios</h2></div>
+<div class="col-sm-6">
+	<a href="<?php echo APP_URL.'transacciones'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de transacciones
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'usuarios'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de usuarios
+		</button>
+	</a>
+</div>				
+</div>
+</div>
+
+<div class="container">
+	<div class="col-md-6 mx-auto">
+		<form class="form form-group" action="<?php echo APP_URL."usuarios/agregar"; ?>" method="POST">
+			
+			<div class="form-group">
+				<label for="nombre">Nombre</label>
+				<input type="text" name="nombre" class="form-control">
+			</div>
+						<div class="form-group">
+				<label for="apellidos">Apellidos</label>
+				<input type="text" name="apellidos" class="form-control">
+			</div>
+						<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" name="email" class="form-control">
+			</div>
+
+			<button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Guardar</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-6 text-light"><h2>Agregar Tarea</h2></div>
+<div class="col-sm-6">
+	<a href="<?php echo APP_URL.'usuarios'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de usuarios
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'transacciones'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de transacciones
+		</button>
+	</a>
+</div>			
+</div>
+</div>
+
+<div class="container">
+	<div class="col-md-6 mx-auto">
+		<form class="form form-group" action="<?php echo APP_URL."transacciones/agregar"; ?>" method="POST">
+
+			<label for="cantidad">Cantidad</label>
+			<input type="number" step="any" name="cantidad" class="form-control">
+
+			<label for="fecha">Fecha</label>
+			<input type="date" name="fecha" value="<?php echo date('d-m-y'); ?>" class="form-control">
+
+			<label for="estado">Tipo</label>
+			<select name="estado" class="form-control" >
+				<option value="1">Ingreso</option>
+				<option value="0">Egreso</option>
+			</select>
+
+			<label for="categoria">Categoria</label>
+			<select name="categoria" class="form-control">
+				<?php
+				print_r($this->categorias); 
+					foreach ($this->categorias as $categoria) {
+						echo "<option value=".$categoria[0].">".$categoria[1]."</option>";
+					}
+				?>
+			</select>
+
+			<button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Guardar</button>
+		</form>
+	</div>
+</div>

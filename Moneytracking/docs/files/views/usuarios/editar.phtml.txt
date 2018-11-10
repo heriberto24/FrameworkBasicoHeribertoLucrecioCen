@@ -1,0 +1,43 @@
+<div class="">
+<div class="navbar navbar-dark bg-dark">
+<div class="col-sm-8 text-light"><h2>Editar usuarios</h2></div>
+<div class="col-sm-4">
+	<a href="<?php echo APP_URL.'transacciones'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de transacciones
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'categorias'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-book"></span> Lista de categorias
+		</button>
+	</a>
+	<a href="<?php echo APP_URL.'usuarios'; ?>">
+		<button class="btn btn-sm btn-primary">
+			<span class="fa fa-plus"></span> Lista de usuarios
+		</button>
+	</a>
+</div>				
+</div>
+</div>
+<div class="container">
+	<div class="col-md-6 mx-auto">		
+		<form action="<?php echo APP_URL."usuarios/editar"; ?>" method="POST">
+			<input type="hidden" name="id" value="<?php echo $this->usuario["id"]; ?>">
+			<div class="form-group">
+				<label for="nombre">Nombre</label>
+				<input type="text" name="nombre" class="form-control" value="<?php echo $this->usuario["nombre"]; ?>">
+			</div>
+						<div class="form-group">
+				<label for="apellidos">Apellidos</label>
+				<input type="text" name="apellidos" class="form-control" value="<?php echo $this->usuario["apellidos"]; ?>">
+			</div>
+						<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" name="email" class="form-control" value="<?php echo $this->usuario["email"]; ?>">
+			</div>
+			<button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Guardar</button>
+		</form>
+	</div>
+</div>
+

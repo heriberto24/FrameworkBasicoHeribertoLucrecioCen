@@ -1,0 +1,141 @@
+<?php  
+class TransaccionModel extends AppModel
+{
+	/**
+	 * Hereda del metodo construct
+	 * @return type
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+	/**
+	 * Obtiene de la base de datos todas las transacciones existentes
+	 * @return type
+	 */
+	public function getTransacciones()
+	{
+			$transacciones = $this->_db->query("SELECT * FROM transacciones INNER JOIN categorias ON transacciones.id_categoria=categorias.id");
+			foreach (range(0, $transacciones->columnCount()-1) as $column_index) {
+				$meta[] = $transacciones->getColumnMeta($column_index);
+			}
+
+			$resultado = $transacciones->fetchall(PDO::FETCH_NUM);
+			for ($i=0; $i < count($resultado); $i++) { 
+				$j=0;
+				foreach ($meta as $value) {
+					$rows[$i][$value["table"]][$value["name"]] =
+					$resultado[$i][$j];
+					$j++;
+				}
+			}
+			return $rows;				
+	}
+	/**
+	 * Inserta en la base de datos una nueva transaccion
+	 * @param type|array $datos 
+	 * @return type
+	 */
+	public function agregar($datos = array())
+	{
+		$consulta=$this->_db->prepare(
+				"INSERT INTO transacciones
+				(id_categoria,cantidad,estado,fecha)
+				VALUES
+				(:id_categoria,:cantidad,:estado,:fecha)"
+			);
+
+			$consulta->bindParam(":id_categoria",$datos["categoria"]);
+			$consulta->bindParam(":cantidad",$datos["cantidad"]);
+			$consulta->bindParam(":estado",$datos["estado"]);
+			$consulta->bindParam(":fecha",$datos["fecha"]);
+
+			if($consulta->execute())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+	}
+	/**
+	 * Por medio de la id actualiza una tarea en la base de datos
+	 * @param type|array $datos 
+	 * @return type
+	 */
+	public function actualizar($datos = array())
+	{
+		$consulta=$this->_db->prepare(
+			"UPDATE transacciones SET
+			cantidad=:cantidad,
+			id_categoria=:id_categoria,
+			estado=:estado,
+			fecha=:fecha
+			WHERE id=:id"
+		);
+		$consulta->bindParam(":cantidad",$datos["cantidad"]);
+		$consulta->bindParam(":id_categoria",$datos["categoria"]);
+		$consulta->bindParam(":estado",$datos["estado"]);
+		$consulta->bindParam(":fecha",$datos["fecha"]);
+		$consulta->bindParam(":id",$datos["id"]);
+		if($consulta->execute())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	/**
+	 * Busca en la base de datos una transaccion que tenga la id seleccionada
+	 * @param type $id 
+	 * @return type
+	 */
+	public function buscarPorId($id)
+	{
+		$transaccion = $this->_db->prepare("SELECT * FROM transacciones WHERE id=:id");
+		$transaccion->bindParam(":id",$id);
+		$transaccion->execute();
+		$registro = $transaccion->fetch();
+
+		if ($registro) 
+		{
+			return $registro;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	/**
+	 * Elimina de la base de datos una transaccion que tenga la id seleccionada
+	 * @param type $id 
+	 * @return type
+	 */
+	public function eliminarPorId($id){
+		$consulta = $this->_db->prepare("DELETE FROM transacciones WHERE id=:id");
+		$consulta->bindParam(":id",$id);
+		if ($consulta->execute())
+			return true;
+		else
+			return false;
+	}
+	public function estado ($id, $estado)
+	{
+		$consulta=$this->_db->prepare(
+			"UPDATE transacciones SET
+			estado=:estado
+			WHERE id=:id"
+		);
+
+		$consulta->bindParam(":id",$id);
+		$consulta->bindParam(":estado",$estado);
+		if ($consulta->execute())
+			return true;
+		else
+			return false;
+	}
+}
+?>
