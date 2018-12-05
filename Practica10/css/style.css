@@ -1,0 +1,12 @@
+
+img{
+	width: 100%;
+	height: auto;
+}
+nav ul{
+	list-style-type: none;
+	padding:0;
+}
+header nav ul li{
+	display: inline;
+}
