@@ -1,0 +1,33 @@
+.about-parallax{
+	background-image: url('../img/about.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.about-content{
+	padding: 20px;
+	border-radius: 3px;
+	margin: 20px;
+	background-color: rgba(255,255,255,0.2);
+}
+.sc{
+	padding: 30px 5px ;
+}
+.about-parallax-home{
+	background-image: url('../img/header-bg.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.about-parallax-links{
+	background-image: url('../img/menu.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.about-content-home{
+	padding: 20px;
+	border-radius: 3px;
+	margin: 20px;
+	background-color: rgba(255,255,255,0.5);
+}
